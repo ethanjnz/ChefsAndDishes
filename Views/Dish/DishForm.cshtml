@@ -1,0 +1,59 @@
+@model Dish
+<div class="text-center m-5">
+    @await Html.PartialAsync("_navbar")
+</div>
+<div>
+    <h1 class="text-center">Add a Dish!</h1>
+    <hr>
+</div>
+<div class="container m-5">
+    <div class="card">
+        <div class="card-body">
+            <form asp-action="CreateDish" asp-controller="Dish" method="post">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="m-3">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name">
+                            <span class="text-danger" asp-validation-for="Name"></span>
+                        </div>
+                        <div class="m-3">
+                            <label asp-for="Calories"></label>
+                            <input asp-for="Calories">
+                            <span class="text-danger" asp-validation-for="Calories"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="m-3">
+                            <label class="form-label" asp-for="UserId"></label>
+                            <select class="form-select" asp-for="UserId">
+                                <option selected disabled>-- Choose Chef -- </option>
+                                @foreach (User u in ViewBag.TheChefs)
+                                {
+                                    <option value=@u.UserId>@u.FirstName @u.LastName</option>
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="UserId"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-4">
+                        <div class="m-3">
+                            <label class="form-label" asp-for="Tastiness"></label>
+                            <select class="form-select" asp-for="Tastiness">
+                                <option selected disabled>-- Choose Value -- </option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="Tastiness"></span>
+                        </div>
+                        <button class="btn btn-primary float-end me-3">Add a Dish</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
